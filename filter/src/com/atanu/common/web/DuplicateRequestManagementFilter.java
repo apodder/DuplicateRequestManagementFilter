@@ -29,8 +29,9 @@ public class DuplicateRequestManagementFilter  implements Filter {
 			= new CustomHttpServletRequestWrapper(request);
 			String md5Hex = DigestUtils.md5Hex(customHttpServletRequestWrapper.getBody());
 			if(!requestTokens.contains(md5Hex)){
-				requestTokens.add(md5Hex);
 				chain.doFilter(customHttpServletRequestWrapper, response);
+				requestTokens.add(md5Hex);
+				//int i = 0;
 			}else{
 				((HttpServletResponse) response).setStatus(HttpStatus.CONFLICT.value());
 				return;
