@@ -36,6 +36,8 @@ public class DuplicateRequestManagementFilter  implements Filter {
 				((HttpServletResponse) response).setStatus(HttpStatus.CONFLICT.value());
 				return;
 			}
+		}else{
+			chain.doFilter(request, response);
 		}
 	}
 	public void init(FilterConfig filterConfig) throws ServletException {
